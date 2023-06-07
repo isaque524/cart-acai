@@ -44,10 +44,8 @@ export class TiposComponent implements OnInit {
   addSorvete(){
     this.sabor.getSabores().subscribe(res =>{
       this.SaborList = res.resultados;
-      this.SaborList.forEach((a:any)=>{
-        delete Object.assign(a, {['tipoS']: a['tipo'] })['tipo'];
-        Object.assign(a,{quantidade:1, total:a.preco})
-
+      this.SaborList.forEach((b:any)=>{
+        delete Object.assign(b, {['tipoS']: b['tipo'] })['tipo'];
       })
     })
   }
@@ -72,8 +70,11 @@ export class TiposComponent implements OnInit {
     if(this.ItemT.qtd_adicionais !=0 ){
           this.loppCart(item)
          }else{
-          this.carrinho.push(this.ItemT,this.ItemS)
-           this.cart.addtoCart(this.carrinho); 
+          this.ItemS.push(conItem)
+            this.carrinho.push(this.ItemT,this.ItemS)  
+            /* this.carrinho = {...this.ItemT,...this.ItemS}   */
+           /*  this.carrinho = this.ItemS.concat(this.ItemT)  */
+           this.cart.addtoCart(this.carrinho);
           /* localStorage.setItem('BD',JSON.stringify(this.carrinho)) */
          }
     }

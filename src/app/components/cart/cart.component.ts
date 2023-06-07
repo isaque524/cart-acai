@@ -8,7 +8,8 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  public products: any = [];
+  resultados: any =[];
+  public products: any = [] ;
   public grandTotal !: number;
 
   constructor(private cartService: CartService) { }
@@ -17,7 +18,9 @@ export class CartComponent implements OnInit {
     this.cartService.getProducts()
     .subscribe((res: any)=>{
       this.products = res;
+      /* this.resultados = {...this.products} */
       this.grandTotal = this.cartService.getTotalPrice();
+      
     })
 
   }

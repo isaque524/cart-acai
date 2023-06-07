@@ -17,7 +17,7 @@ export class CartService {
   }
 
   setProduct(product : any){
-    this.cartItemList.push(product[1]);
+    this.cartItemList.push(product);
     this.tiposList.next(product);
     console.log(this.cartItemList)
   }
