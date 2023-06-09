@@ -4,23 +4,22 @@ import { CartService } from 'src/app/services/cart.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent /* implements OnInit */ {
+  resultados: any = [];
+  public products: any = [];
+  public grandTotal!: number;
 
-  resultados: any =[];
-  public products: any = [] ;
-  public grandTotal !: number;
+  constructor() {}
 
-  constructor(private cartService: CartService) { }
-
-  ngOnInit(): void {
+  /*   ngOnInit(): void {
     this.cartService.getProducts()
     .subscribe((res: any)=>{
       this.products = res;
       /* this.resultados = {...this.products} */
-      this.grandTotal = this.cartService.getTotalPrice();
-      
+  /*    this.grandTotal = this.cartService.getTotalPrice();
+
     })
 
   }
@@ -29,7 +28,5 @@ export class CartComponent implements OnInit {
   }
   emptycart(){
     this.cartService.removeAllCart();
-  }
-
-
+  }  */
 }

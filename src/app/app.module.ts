@@ -8,8 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { TiposComponent } from './components/tipos/tipos.component';
 import { HeaderComponent } from './components/header/header.component';
-import { CartComponent } from './components/cart/cart.component';
+
 import { SaboresComponent } from './components/sabores/sabores.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [

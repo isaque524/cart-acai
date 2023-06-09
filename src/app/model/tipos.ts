@@ -2,7 +2,7 @@
 export interface RootObject {
   sucesso: boolean;
   mensagem: string;
-  resultados: any[];
+  resultados: Resultado[];
 }
 
 export interface Resultado {

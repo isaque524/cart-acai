@@ -18,3 +18,8 @@ export interface CriarSaborNovo {
   url_imagem: string
   estoque: boolean
 }
+
+export interface PegarSabor{
+  tipo: string
+  nome: string
+}
