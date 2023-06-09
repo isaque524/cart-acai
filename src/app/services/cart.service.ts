@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PegarSabor } from '../model/sabores';
-import { adicional } from '../model/adicional';
+import { Listadicional } from '../model/adicional';
 
 @Injectable({
   providedIn: 'root',
@@ -56,7 +56,7 @@ export class ItemCarrinho {
   private qtd_sabores: number;
   private qtd_adicionais: number;
   private sabores: Array<PegarSabor>;
-  private adicionais: Array<adicional>;
+  private adicionais: Array<Listadicional>;
 
   constructor(
     tipo: string,
@@ -99,11 +99,11 @@ export class ItemCarrinho {
   }
 
   // Adicionar um adicional no copo
-  public pushAdicionais(nome: adicional): void {
+  public pushAdicionais(nome: Listadicional): void {
     this.adicionais.push(nome);
   }
   // Remover um adicional do copo
-  public deleteAdicionais(nome: adicional): void {
+  public deleteAdicionais(nome: Listadicional): void {
     let index = this.adicionais.findIndex((adicional) => adicional == nome);
     this.adicionais.splice(index, 1);
   }

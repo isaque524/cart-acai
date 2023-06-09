@@ -1,4 +1,4 @@
-import { adicional } from './../../model/adicional';
+import { Listadicional, adicional } from './../../model/adicional';
 ('use strict');
 import { Component, OnInit } from '@angular/core';
 import { PegarSabor } from 'src/app/model/sabores';
@@ -36,9 +36,9 @@ export class TiposComponent implements OnInit {
   ngOnInit(): void {
     this.tipo.getAcaiSorveteTodosTipos().subscribe((res) => {
       this.tiposList = res.resultados;
-      this.tiposList.forEach((a: any) => {
+      /*  this.tiposList.forEach((a: any) => {
         Object.assign(a, { quantidade: 1, total: a.preco });
-      });
+      }); */
     });
   }
 
@@ -76,8 +76,9 @@ export class TiposComponent implements OnInit {
   complementos(item: any) {
     let { qtd_adicionais, adicionais } = this.itemCarrinho.getItem;
     if (adicionais.length < qtd_adicionais) {
-      let nome: adicional = { nome: item.nome, imagem: item.url_imagem };
+      let nome: Listadicional = { nome: item.nome };
       this.itemCarrinho.pushAdicionais(nome);
-    } else [alert('ja foi mane'), console.log(this.itemCarrinho)];
+    } else [alert('ja foi mane'),
+    console.log(this.itemCarrinho)];
   }
 }

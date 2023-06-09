@@ -1,4 +1,4 @@
-.card-top {
+ .card-top {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,10 @@
 .item img {
   width: 64px;
 }
+.row .card img{
+  position:relative;
+  left:50px;
+ }
 
 .item {
   margin: 0px 15px;
