@@ -8,28 +8,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { TiposComponent } from './components/tipos/tipos.component';
 import { HeaderComponent } from './components/header/header.component';
-
-import { SaboresComponent } from './components/sabores/sabores.component';
 import { CartComponent } from './components/cart/cart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TiposComponent,
-    HeaderComponent,
-    CartComponent,
-    SaboresComponent
-
-
-  ],
+  declarations: [AppComponent, TiposComponent, HeaderComponent, CartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -43,3 +43,24 @@
   transition: 0.3s ease-in-out;
   transform: scale(1.1);
 }
+
+.search-container{
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.search-container form{
+  width: 30%;
+  position: relative;
+}
+.search-container.bi-search{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.search-container input{
+  padding: 0.5em;
+  width: 100%;
+  text-align: center;
+}

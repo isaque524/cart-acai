@@ -24,6 +24,7 @@ export class TiposComponent implements OnInit {
   itemCarrinho!: ItemCarrinho;
   ItemS: any = [];
   public tiposList: any;
+  public tiposListc: any;
   public SaborList: any;
   public adicionaisList: any;
 
@@ -36,6 +37,7 @@ export class TiposComponent implements OnInit {
   ngOnInit(): void {
     this.tipo.getAcaiSorveteTodosTipos().subscribe((res) => {
       this.tiposList = res.resultados;
+      this.tiposListc = this.tiposList;
       /*  this.tiposList.forEach((a: any) => {
         Object.assign(a, { quantidade: 1, total: a.preco });
       }); */
@@ -78,7 +80,15 @@ export class TiposComponent implements OnInit {
     if (adicionais.length < qtd_adicionais) {
       let nome: Listadicional = { nome: item.nome };
       this.itemCarrinho.pushAdicionais(nome);
-    } else [alert('ja foi mane'),
-    console.log(this.itemCarrinho)];
+    } else [alert('ja foi mane'), console.log(this.itemCarrinho)];
+  }
+
+  search(e: Event): void {
+    const target = e.target as HTMLInputElement;
+    const value = target.value;
+
+    this.tiposList = this.tiposListc.filter((tipos: any) => {
+      return tipos._id.toLowerCase().includes(value);
+    });
   }
 }

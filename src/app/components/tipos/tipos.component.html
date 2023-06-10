@@ -1,5 +1,10 @@
  <div *ngIf="!clicSorvete"  class="container">
   <div class="row">
+    <form >
+      <span class="bi bi-search"></span>
+      <input type="text" class="form-control" placeholder="Procure o item" (input)="search($event)" >
+    </form>
+
       <ng-container *ngFor="let itemT of tiposList">
           <div  class="card col-md-3">
               <img src="{{itemT.url_imagem}}" alt="">
