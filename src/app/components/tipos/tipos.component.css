@@ -44,22 +44,17 @@
   transform: scale(1.1);
 }
 
-.search-container{
-  margin-bottom: 2em;
+.novarow form{
   width: 100%;
-}
-
-.search-container form{
-  width: 30%;
   position: relative;
 }
-.search-container.bi-search{
+.novarow  span{
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 8px;
 }
 
-.search-container input{
+.ronovaroww  input{
   padding: 0.5em;
   width: 100%;
   text-align: center;

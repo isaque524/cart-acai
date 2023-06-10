@@ -21,6 +21,8 @@ import Swal from 'sweetalert2';
 export class TiposComponent implements OnInit {
   resultados: any = [];
   public clicSorvete: boolean = false;
+  public clicbtnSorvete: boolean = false;
+  public clicbtnAdc: boolean = false;
   itemCarrinho!: ItemCarrinho;
   ItemS: any = [];
   public tiposList: any;
@@ -72,7 +74,7 @@ export class TiposComponent implements OnInit {
     if (sabores.length < qtd_sabores) {
       let sabor: PegarSabor = { nome: item.nome, tipo: item.tipo };
       this.itemCarrinho.pushSabor(sabor);
-    } else [alert('ja foi mane')];
+    } else [alert('ja foi mane'), (this.clicbtnSorvete = true)];
   }
 
   complementos(item: any) {
@@ -80,7 +82,12 @@ export class TiposComponent implements OnInit {
     if (adicionais.length < qtd_adicionais) {
       let nome: Listadicional = { nome: item.nome };
       this.itemCarrinho.pushAdicionais(nome);
-    } else [alert('ja foi mane'), console.log(this.itemCarrinho)];
+    } else
+      [
+        alert('ja foi mane'),
+        (this.clicbtnAdc = true),
+        console.log(this.itemCarrinho),
+      ];
   }
 
   search(e: Event): void {
