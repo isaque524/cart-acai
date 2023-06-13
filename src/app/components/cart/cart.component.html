@@ -10,7 +10,7 @@
                           <th>Product Image</th>
                           <th>Preço</th>
                           <th>Sabor</th>
-                          <th>Quantidade</th>
+                          <th>Adicionais</th>
                           <th>Total</th>
                           <th>Action</th>
                       </tr>
@@ -21,13 +21,14 @@
                           <td>{{item.tipo}} de {{item.capacidade}}ml</td>
                           <td><img style="width: 120px;" src="{{item.url_imagem}}" alt=""></td>
                           <td style="width: 12%;">{{item.preco}}</td>
-                          <span *ngFor="let sabor of item.sabores">
-                            <td  style="width: 12%;">{{sabor.tipo}} {{sabor.nome}}</td>
-                          </span>
-                          <td style="width: 12%;"><input type="numb" value=" {{item.quantidade}}"></td>
+                            <td  *ngFor="let sabor of  item.sabores"  style="width: 12%;">{{sabor.tipo}} {{sabor.nome}}</td>
+                            <div *ngIf="item.adicionais == ''">
+                              <td>Sem adicionais </td>
+                            </div>
+                            <div *ngIf="item.adicionais != ''">
+                              <td *ngFor="let adicional of item.adicionais"  style="width: 12%;">{{adicional.nome}}</td>
+                            </div>
                           <td style="width: 12%;">{{item.total}}</td>
-
-
                           <td>
                                <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                           </td>
