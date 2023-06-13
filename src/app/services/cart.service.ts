@@ -17,15 +17,14 @@ export class CartService {
   }
 
   setProduct(product: any) {
-    this.cartItemList.push(product);
+    this.cartItemList.push(...product);
     this.tiposList.next(product);
-    console.log(this.cartItemList);
   }
   addtoCart(product: any) {
     this.cartItemList.push(product);
     this.tiposList.next(this.cartItemList);
-    console.log(this.cartItemList);
     this.getTotalPrice();
+    console.log(this.cartItemList);
   }
   getTotalPrice(): number {
     let grandTotal = 0;
@@ -36,7 +35,7 @@ export class CartService {
   }
   removeCartItem(product: any) {
     this.cartItemList.map((a: any, index: any) => {
-      if (product._id === a._id) {
+      if (product.id === a.id) {
         this.cartItemList.splice(index, 1);
       }
     });
@@ -55,6 +54,8 @@ export class ItemCarrinho {
   private preco: number;
   private qtd_sabores: number;
   private qtd_adicionais: number;
+  private quantidade: number;
+  private total: number;
   private sabores: Array<PegarSabor>;
   private adicionais: Array<Listadicional>;
 
@@ -63,13 +64,17 @@ export class ItemCarrinho {
     capacidade: number,
     preco: number,
     qtd_sabores: number,
-    qtd_adicionais: number
+    qtd_adicionais: number,
+    quantidade: number,
+    total: number
   ) {
     this.tipo = tipo;
     this.capacidade = capacidade;
     this.preco = preco;
     this.qtd_sabores = qtd_sabores;
     this.qtd_adicionais = qtd_adicionais;
+    this.quantidade = quantidade;
+    this.total = total;
     this.sabores = [];
     this.adicionais = [];
   }
@@ -137,6 +142,10 @@ export class CarrinhoCompra {
   // Obter a soma total do carrinho
   get getPreco(): number {
     return this.items.reduce((soma, item) => soma + item.getItem.preco, 0);
+  }
+
+  get getQuantidade(): number {
+    return this.items.reduce((soma, item) => soma + item.getItem.quantidade, 0);
   }
 }
 

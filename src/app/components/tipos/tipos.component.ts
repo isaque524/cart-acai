@@ -1,17 +1,13 @@
-import { Listadicional, adicional } from './../../model/adicional';
+import { carrinho } from './../../services/cart.service';
+import { Listadicional } from './../../model/adicional';
 ('use strict');
 import { Component, OnInit } from '@angular/core';
 import { PegarSabor } from 'src/app/model/sabores';
 import { AdicionaisService } from 'src/app/services/Adicionais.service';
 
-import {
-  ItemCarrinho,
-  CarrinhoCompra,
-  carrinho,
-} from 'src/app/services/cart.service';
+import { ItemCarrinho, CartService } from 'src/app/services/cart.service';
 import { SaboresService } from 'src/app/services/sabores.service';
 import { AcaiSorveteService } from 'src/app/services/tipos.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tipos',
@@ -26,34 +22,39 @@ export class TiposComponent implements OnInit {
   itemCarrinho!: ItemCarrinho;
   ItemS: any = [];
   public tiposList: any;
-  public tiposListc: any;
+  public tiposListclone: any;
   public SaborList: any;
   public adicionaisList: any;
 
   constructor(
     private tipo: AcaiSorveteService,
     private sabor: SaboresService,
-    private adicionalComp: AdicionaisService
+    private adicionalComp: AdicionaisService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.tipo.getAcaiSorveteTodosTipos().subscribe((res) => {
       this.tiposList = res.resultados;
-      this.tiposListc = this.tiposList;
-      /*  this.tiposList.forEach((a: any) => {
+      this.tiposListclone = this.tiposList;
+      this.tiposList.forEach((a: any) => {
         Object.assign(a, { quantidade: 1, total: a.preco });
-      }); */
+      });
     });
   }
 
   montarCopo(item: any) {
     this.clicSorvete = true;
+    this.clicbtnSorvete = false;
+    this.clicbtnAdc = false;
     this.itemCarrinho = new ItemCarrinho(
       item.tipo,
       item.capacidade,
       item.preco,
       item.qtd_sabores,
-      item.qtd_adicionais
+      item.qtd_adicionais,
+      item.quantidade,
+      item.total
     );
 
     this.chamarSorvete();
@@ -82,19 +83,25 @@ export class TiposComponent implements OnInit {
     if (adicionais.length < qtd_adicionais) {
       let nome: Listadicional = { nome: item.nome };
       this.itemCarrinho.pushAdicionais(nome);
-    } else
-      [
-        alert('ja foi mane'),
-        (this.clicbtnAdc = true),
-        console.log(this.itemCarrinho),
-      ];
+    } else [alert('ja foi mane'), (this.clicbtnAdc = true)];
+  }
+  montarCarrinho() {
+    let { sabores } = this.itemCarrinho.getItem;
+    if (sabores.length <= 0) {
+      alert('Adicione pelo menos um sabor');
+    } else {
+      carrinho.pushCarrinho(this.itemCarrinho);
+      this.cartService.addtoCart(this.itemCarrinho);
+      alert('add');
+      this.clicSorvete = false;
+    }
   }
 
   search(e: Event): void {
     const target = e.target as HTMLInputElement;
     const value = target.value;
 
-    this.tiposList = this.tiposListc.filter((tipos: any) => {
+    this.tiposList = this.tiposListclone.filter((tipos: any) => {
       return tipos._id.toLowerCase().includes(value);
     });
   }

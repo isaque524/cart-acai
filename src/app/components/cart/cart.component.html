@@ -1,4 +1,4 @@
-<!-- <ng-container *ngIf="products.length !=0">
+<ng-container *ngIf="products.length !=0">
   <div class="container">
       <div class="card-table">
           <div class="cart-product">
@@ -10,31 +10,31 @@
                           <th>Product Image</th>
                           <th>Preço</th>
                           <th>Sabor</th>
-                           <th>Quantidade</th>
+                          <th>Quantidade</th>
                           <th>Total</th>
                           <th>Action</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let item of this.products">
-
-                          <td>{{item.tipo}}</td>
+                      <tr *ngFor="let item of this.products;let i = index">
+                        <td>{{i+1}}</td>
+                          <td>{{item.tipo}} de {{item.capacidade}}ml</td>
                           <td><img style="width: 120px;" src="{{item.url_imagem}}" alt=""></td>
-                          <th style="width: 12%;">{{item.preco}}</th>
-                           <!-- <span *ngFor="let item of this.products;">
-                            <th style="width: 12%;">{{item.tipoS}} {{item.nome}}</th><br>
-                          </span>  -->
-                         <!--  <td style="width: 12%;">{{item.quantidade}}</td>
+                          <td style="width: 12%;">{{item.preco}}</td>
+                          <span *ngFor="let sabor of item.sabores">
+                            <td  style="width: 12%;">{{sabor.tipo}} {{sabor.nome}}</td>
+                          </span>
+                          <td style="width: 12%;"><input type="numb" value=" {{item.quantidade}}"></td>
                           <td style="width: 12%;">{{item.total}}</td>
 
 
                           <td>
-                              <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                               <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                           </td>
                       </tr>
                       <tr>
                           <td colspan="4"></td>
-                          <td><button (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
+                           <td><button (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
                           <td><button routerLink="/products" class="btn btn-primary">Shop More</button></td>
                           <td><button class="btn btn-success">Checkout</button></td>
                           <td><strong>Grand Total : ${{grandTotal}}</strong></td>
@@ -44,10 +44,10 @@
           </div>
       </div>
   </div>
-</ng-container> -->
+</ng-container>
 
 
-<!-- <ng-container *ngIf="products.length == 0">
+<ng-container *ngIf="products.length == 0">
   <div class="container">
       <div class="card">
           <h5 class="card-title">My Cart</h5>
@@ -59,5 +59,5 @@
           <button routerLink="/products" class="btn btn-primary">Shop Now</button>
       </div>
   </div>
-</ng-container> -->
+</ng-container>
 
