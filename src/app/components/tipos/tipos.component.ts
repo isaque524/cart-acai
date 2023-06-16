@@ -1,4 +1,3 @@
-import { carrinho } from './../../services/cart.service';
 import { Listadicional } from './../../model/adicional';
 ('use strict');
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +7,7 @@ import { AdicionaisService } from 'src/app/services/Adicionais.service';
 import { ItemCarrinho, CartService } from 'src/app/services/cart.service';
 import { SaboresService } from 'src/app/services/sabores.service';
 import { AcaiSorveteService } from 'src/app/services/tipos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tipos',
@@ -16,9 +16,8 @@ import { AcaiSorveteService } from 'src/app/services/tipos.service';
 })
 export class TiposComponent implements OnInit {
   resultados: any = [];
-  public clicSorvete: boolean = false;
-  public clicbtnSorvete: boolean = false;
-  public clicbtnAdc: boolean = false;
+  public LigaAcordion: boolean = false;
+  public reiniciarClic: boolean = false;
   itemCarrinho!: ItemCarrinho;
   ItemS: any = [];
   public tiposList: any;
@@ -44,9 +43,8 @@ export class TiposComponent implements OnInit {
   }
 
   montarCopo(item: any) {
-    this.clicSorvete = true;
-    this.clicbtnSorvete = false;
-    this.clicbtnAdc = false;
+    this.LigaAcordion = true;
+    this.reiniciarClic = false;
     this.itemCarrinho = new ItemCarrinho(
       item.tipo,
       item.capacidade,
@@ -66,34 +64,96 @@ export class TiposComponent implements OnInit {
       this.SaborList = res.resultados;
     });
   }
-  chamarComplimentosAdicionais(): void {
-    this.adicionaisList = this.adicionalComp.getAll();
-  }
 
   adicionarSorvete(item: any) {
     let { qtd_sabores, sabores } = this.itemCarrinho.getItem;
     if (sabores.length < qtd_sabores) {
+      item.clicado = true;
       let sabor: PegarSabor = { nome: item.nome, tipo: item.tipo };
       this.itemCarrinho.pushSabor(sabor);
-    } else [alert('ja foi mane'), (this.clicbtnSorvete = true)];
+    } else
+      [
+        Swal.fire({
+          title: 'Voce atingiu a quantidade maxima de sabores!',
+          icon: 'info',
+          text: 'Delete um sabor para adicionar outro',
+        }),
+      ];
   }
 
-  complementos(item: any) {
+  removerSorvete(item: any) {
+    Swal.fire({
+      title: 'Tem certeza que deseja deletar??',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Deletar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        item.clicado = false;
+        let sabor: PegarSabor = { nome: item.nome, tipo: item.tipo };
+        this.itemCarrinho.deleteSabor(sabor);
+
+        Swal.fire('Deletado!', '', 'success');
+      }
+    });
+  }
+
+  /* clicAdd(item: any, index: number) {
+    item.clicado = true;
+  } */
+
+  /* clicremover(item: any, index: number) {
+    item.clicado = false;
+  } */
+
+  chamarComplimentosAdicionais(): void {
+    this.adicionaisList = this.adicionalComp.getAll();
+  }
+
+  adicionarComplementos(item: any) {
     let { qtd_adicionais, adicionais } = this.itemCarrinho.getItem;
     if (adicionais.length < qtd_adicionais) {
+      item.clicado = true;
       let nome: Listadicional = { nome: item.nome };
       this.itemCarrinho.pushAdicionais(nome);
-    } else [alert('ja foi mane'), (this.clicbtnAdc = true)];
+    } else
+      [
+        Swal.fire({
+          title: 'Voce atingiu a quantidade maxima de sabores!',
+          icon: 'info',
+          text: 'Delete um sabor para adicionar outro',
+        }),
+      ];
   }
+
+  removerComplementos(item: any) {
+    Swal.fire({
+      title: 'Tem certeza que deseja deletar??',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Deletar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        item.clicado = false;
+        let adicional: Listadicional = { nome: item.nome };
+        this.itemCarrinho.deleteAdicionais(adicional);
+
+        Swal.fire('Deletado!', '', 'success');
+      }
+    });
+  }
+
   montarCarrinho() {
     let { sabores } = this.itemCarrinho.getItem;
     if (sabores.length <= 0) {
-      alert('Adicione pelo menos um sabor');
+      Swal.fire({
+        title: 'Adicione pelo menos um sabor',
+        icon: 'info',
+      });
     } else {
-      carrinho.pushCarrinho(this.itemCarrinho);
       this.cartService.addtoCart(this.itemCarrinho);
       alert('add');
-      this.clicSorvete = false;
+      this.LigaAcordion = false;
     }
   }
 

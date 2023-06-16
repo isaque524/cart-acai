@@ -5,9 +5,9 @@
               <table class="table table-responsive">
                   <thead>
                       <tr>
-                          <th>Sr.No</th>
-                          <th>Product Name</th>
-                          <th>Product Image</th>
+                          <th>Id</th>
+                          <th>Nome</th>
+                          <th>Imagem</th>
                           <th>Preço</th>
                           <th>Sabor</th>
                           <th>Adicionais</th>
@@ -21,13 +21,18 @@
                           <td>{{item.tipo}} de {{item.capacidade}}ml</td>
                           <td><img style="width: 120px;" src="{{item.url_imagem}}" alt=""></td>
                           <td style="width: 12%;">{{item.preco}}</td>
-                            <td  *ngFor="let sabor of  item.sabores"  style="width: 12%;">{{sabor.tipo}} {{sabor.nome}}</td>
-                            <div *ngIf="item.adicionais == ''">
-                              <td>Sem adicionais </td>
+                          <td>
+                            <div *ngFor="let sabor of  item.sabores" >
+                              <span  style="width: 12%;" >{{sabor.tipo}} {{sabor.nome}}</span>
                             </div>
-                            <div *ngIf="item.adicionais != ''">
-                              <td *ngFor="let adicional of item.adicionais"  style="width: 12%;">{{adicional.nome}}</td>
+                          </td>
+                          
+                          <td>
+                            <div *ngFor="let adicional of item.adicionais">
+                              <span   style="width: 12%;">{{adicional.nome}}</span>
                             </div>
+                          </td>
+                    
                           <td style="width: 12%;">{{item.total}}</td>
                           <td>
                                <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>

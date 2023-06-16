@@ -98,8 +98,11 @@ export class ItemCarrinho {
     this.sabores.push(sabor);
   }
   // Apagar um sabor
-  public deleteSabor(nome: PegarSabor['tipo']): void {
-    let index = this.sabores.findIndex((sabor) => sabor.nome == nome);
+  public deleteSabor(sabor: PegarSabor): void {
+    let index = this.sabores.findIndex(
+      (item) => sabor.nome == item.nome && sabor.tipo == item.tipo
+    );
+    if (index < 0) return;
     this.sabores.splice(index, 1);
   }
 
@@ -108,45 +111,11 @@ export class ItemCarrinho {
     this.adicionais.push(nome);
   }
   // Remover um adicional do copo
-  public deleteAdicionais(nome: Listadicional): void {
-    let index = this.adicionais.findIndex((adicional) => adicional == nome);
+  public deleteAdicionais(adicional: Listadicional): void {
+    let index = this.adicionais.findIndex(
+      (item) => adicional.nome == item.nome
+    );
+    if (index < 0) return;
     this.adicionais.splice(index, 1);
   }
 }
-
-export class CarrinhoCompra {
-  private items: Array<ItemCarrinho>;
-  private id: number;
-
-  constructor() {
-    this.items = [];
-    this.id = 1;
-  }
-
-  // Obter uma cópia dos items
-  get getCarrinho(): Array<any> {
-    return [...this.items];
-  }
-  // Adicionar um item no carrinho
-  public pushCarrinho(item: ItemCarrinho) {
-    item.setId(this.id);
-    this.items.push(item);
-    this.id++;
-  }
-  // Apagar item do carrinho
-  public deleteCarrinho(item: ItemCarrinho) {
-    let index = this.items.findIndex((x) => x.getId == item.getId);
-    this.items.splice(index, 1);
-  }
-
-  // Obter a soma total do carrinho
-  get getPreco(): number {
-    return this.items.reduce((soma, item) => soma + item.getItem.preco, 0);
-  }
-
-  get getQuantidade(): number {
-    return this.items.reduce((soma, item) => soma + item.getItem.quantidade, 0);
-  }
-}
-
-export let carrinho = new CarrinhoCompra();

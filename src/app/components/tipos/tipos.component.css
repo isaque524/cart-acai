@@ -1,61 +1,55 @@
- .card-top {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background: #fff;
-  background-clip: border-box;
+.card {
+  margin: 50px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: .25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.item img {
-  width: 64px;
-}
-.row .card img{
-  position:relative;
-  left:50px;
- }
-
-.item {
-  margin: 0px 15px;
-  text-align: center;
-}
-
-.item a:hover {
-  color: blue;
-}
-
-.card {
-  padding: 20px;
-  margin: 50px;
-}
-
-.card img {
-  width: 200px;
-  height: 200px;
+.card-img-top {
+  width: 100%;
+  height: auto;
   margin-bottom: 15px;
+  object-fit: cover;
   transition: 0.3s ease-in-out;
 }
 
-.card img:hover {
-  transition: 0.3s ease-in-out;
+.card:hover .card-img-top {
   transform: scale(1.1);
 }
 
-.novarow form{
+.novarow form {
   width: 100%;
   position: relative;
 }
-.novarow  span{
+
+.novarow span {
   position: absolute;
-  top: 6px;
+  top: 0;
   left: 8px;
+  bottom: 0;
+  margin: auto;
 }
 
-.ronovaroww  input{
+.novarow input {
   padding: 0.5em;
   width: 100%;
   text-align: center;
+}
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100ch;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  margin-top: 1rem;
 }

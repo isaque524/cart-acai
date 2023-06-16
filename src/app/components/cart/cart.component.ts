@@ -1,7 +1,5 @@
-import { CartService, carrinho } from './../../services/cart.service';
+import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { CarrinhoCompra } from 'src/app/services/cart.service';
-import { AcaiSorveteService } from 'src/app/services/tipos.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,14 +9,12 @@ import { AcaiSorveteService } from 'src/app/services/tipos.service';
 export class CartComponent implements OnInit {
   public products: any = [];
   public grandTotal!: number;
-  public pegarSabores: any = [];
-  public pegarAdicionas: any = [];
+  public contarAdicionais: boolean = false;
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.getProducts().subscribe((res) => {
       this.products = res;
-      console.log(this.products);
       this.grandTotal = this.cartService.getTotalPrice();
     });
   }

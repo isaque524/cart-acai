@@ -1,4 +1,4 @@
- <div *ngIf="!clicSorvete"  class="container">
+<!--  <div *ngIf="!LigaAcordion"  class="container">
   <div class="row novarow">
     <form >
       <span class="bi bi-search"></span>
@@ -6,8 +6,8 @@
     </form>
 
       <ng-container *ngFor="let itemT of tiposList">
-          <div  class="card col-md-3">
-              <img src="{{itemT.url_imagem}}" alt="">
+          <div  class="card col-lg-3 col-md-4 col-sm-6">
+              <img src="{{itemT.url_imagem}}"  class="card-img-top" alt="">
               <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{itemT.tipo}}</h5>
               <p><strong>Tamanho</strong>{{itemT.capacidade}}ml</p>
               <p><strong>Preço:</strong> ${{itemT.preco}}</p>
@@ -15,13 +15,40 @@
           </div>
       </ng-container>
 
+
+
   </div>
     </div>
+ -->
+
+ 
+
+
+ <div *ngIf="!LigaAcordion" class="container mt-3">
+  <div class="row novarow">
+   <form>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Procure aqui  um item por tipo" (input)="search($event)">
+      </div>
+    </form>
+
+    <ng-container *ngFor="let itemT of tiposList">
+      <div class="card col-lg-3 col-md-4 col-sm-6">
+        <img src="{{itemT.url_imagem}}" class="card-img-top" alt="">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{itemT.tipo}}</h5>
+          <p class="card-text"><strong>Tamanho:</strong> {{itemT.capacidade}}ml</p>
+          <p class="card-text"><strong>Preço:</strong> ${{itemT.preco}}</p>
+          <button class="btn btn-primary" (click)="montarCopo(itemT);">Adicionar um Sabor</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
 
 
 
-<div>
-  <div *ngIf="clicSorvete"  class="accordion" id="accordionExample">
+  <div *ngIf="LigaAcordion"  class="accordion" id="accordionExample">
 
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
@@ -34,14 +61,16 @@
         <div class="accordion-body">
 
           <div class="container">
-            <div  class="row">
+            <div  class="row  novarow">
           <h3>Você tem direito a {{itemCarrinho.getItem.qtd_sabores}} sabores</h3>
-              <ng-container *ngFor="let item of SaborList">
-                <div  class="card col-md-3">
-                    <img src="{{item.url_imagem}}" alt="">
-                    <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.nome}} {{item.tipo}}</h5>
-                  <button *ngIf="!clicbtnSorvete"  class="btn btn-primary" onclick='this.disabled=true' (click)="adicionarSorvete(item);">Adicionar Sorvete</button>
-                  <button *ngIf="clicbtnSorvete"  class="btn btn-primary" disabled (click)="adicionarSorvete(item);">Adicionar Sorvete</button>'
+              <ng-container *ngFor="let item of SaborList;let i = index">
+                <div  class="card col-lg-3 col-md-4 col-sm-6">
+                  <img src="{{item.url_imagem}}" class="card-img-top" alt="">
+                  <div class="card-body  text-center">
+                    <h5 class="card-title">{{item.nome}} {{item.tipo}}</h5>
+                  <button *ngIf="!item.clicado"  class="btn btn-primary  " (click)="adicionarSorvete(item)">Adicionar Sorvete</button>
+                  <button *ngIf="item.clicado "  class="btn btn-danger "  (click)="removerSorvete(item);">Remover Sorvete</button>
+                  </div>
                </div>
               </ng-container>
               </div>
@@ -64,14 +93,14 @@
         <div class="accordion-body">
 
           <div  class="container">
-            <div  class="row">
+            <div  class="row  novarow">
               <h3>Você tem direito a {{itemCarrinho.getItem.qtd_adicionais}} adicionais</h3>
-              <ng-container *ngFor="let item of adicionaisList">
-                <div class="card col-md-3">
-                    <img src="{{item.imagem}}" alt="">
-                    <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.nome}}</h5>'
-                  <button *ngIf="!clicbtnAdc" class="btn btn-primary" onclick='this.disabled=true' (click)="complementos(item);">Adicionar complementos</button>
-                  <button *ngIf="clicbtnAdc" class="btn btn-primary" disabled (click)="complementos(item);">Adicionar complementos</button>
+              <ng-container *ngFor="let item of adicionaisList;let i = index">
+                <div class="card col-lg-3 col-md-4 col-sm-6">
+                    <img src="{{item.imagem}}" class="card-img-top" alt="">
+                    <h5 class="card-body  text-center">{{item.nome}}</h5>'
+                  <button *ngIf="!item.clicado" class="btn btn-primary"  (click)="adicionarComplementos(item);">Adicionar complementos</button>
+                  <button *ngIf="item.clicado" class="btn btn-danger"  (click)="removerComplementos(item);">Remover complementos</button>
                </div>
               </ng-container>
               </div>
@@ -87,4 +116,4 @@
 
   </div>
 
-    </div>
+
