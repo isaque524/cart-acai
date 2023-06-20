@@ -26,23 +26,23 @@
                               <span  style="width: 12%;" >{{sabor.tipo}} {{sabor.nome}}</span>
                             </div>
                           </td>
-                          
+
                           <td>
                             <div *ngFor="let adicional of item.adicionais">
                               <span   style="width: 12%;">{{adicional.nome}}</span>
                             </div>
                           </td>
-                    
+
                           <td style="width: 12%;">{{item.total}}</td>
                           <td>
-                               <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                               <button (click)="removeItem(item)" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                           </td>
                       </tr>
                       <tr>
                           <td colspan="4"></td>
-                           <td><button (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
-                          <td><button routerLink="/products" class="btn btn-primary">Shop More</button></td>
-                          <td><button class="btn btn-success">Checkout</button></td>
+                           <td><button (click)="emptycart()" class="btn btn-danger">Reiniciar carrinho</button></td>
+                          <td><button routerLink="/products" class="btn btn-primary">Voltar</button></td>
+                          <td><button class="btn btn-success">Compra</button></td>
                           <td><strong>Grand Total : ${{grandTotal}}</strong></td>
                       </tr>
                   </tbody>

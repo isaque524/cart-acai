@@ -35,10 +35,10 @@ export class TiposComponent implements OnInit {
   ngOnInit(): void {
     this.tipo.getAcaiSorveteTodosTipos().subscribe((res) => {
       this.tiposList = res.resultados;
-      this.tiposListclone = this.tiposList;
       this.tiposList.forEach((a: any) => {
         Object.assign(a, { quantidade: 1, total: a.preco });
       });
+      this.tiposListclone = this.tiposList;""
     });
   }
 
@@ -48,6 +48,7 @@ export class TiposComponent implements OnInit {
     this.itemCarrinho = new ItemCarrinho(
       item.tipo,
       item.capacidade,
+      item.url_imagem,
       item.preco,
       item.qtd_sabores,
       item.qtd_adicionais,

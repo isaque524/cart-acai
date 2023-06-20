@@ -51,6 +51,7 @@ export class ItemCarrinho {
   private id!: number;
   private tipo: string;
   private capacidade: number;
+  private url_imagem: string;
   private preco: number;
   private qtd_sabores: number;
   private qtd_adicionais: number;
@@ -62,6 +63,7 @@ export class ItemCarrinho {
   constructor(
     tipo: string,
     capacidade: number,
+    url_imagem: string,
     preco: number,
     qtd_sabores: number,
     qtd_adicionais: number,
@@ -70,6 +72,7 @@ export class ItemCarrinho {
   ) {
     this.tipo = tipo;
     this.capacidade = capacidade;
+    this.url_imagem = url_imagem;
     this.preco = preco;
     this.qtd_sabores = qtd_sabores;
     this.qtd_adicionais = qtd_adicionais;
