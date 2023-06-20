@@ -24,6 +24,7 @@ export class TiposComponent implements OnInit {
   public tiposListclone: any;
   public SaborList: any;
   public adicionaisList: any;
+  public estoque: boolean = false;
 
   constructor(
     private tipo: AcaiSorveteService,
@@ -38,7 +39,8 @@ export class TiposComponent implements OnInit {
       this.tiposList.forEach((a: any) => {
         Object.assign(a, { quantidade: 1, total: a.preco });
       });
-      this.tiposListclone = this.tiposList;""
+      this.tiposListclone = this.tiposList;
+      ('');
     });
   }
 
@@ -63,6 +65,9 @@ export class TiposComponent implements OnInit {
   chamarSorvete() {
     this.sabor.getSabores().subscribe((res) => {
       this.SaborList = res.resultados;
+      if ((this.SaborList.estoque = true)) {
+        this.estoque = true;
+      }
     });
   }
 

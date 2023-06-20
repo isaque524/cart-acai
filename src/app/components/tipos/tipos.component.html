@@ -13,7 +13,7 @@
   </div>
 
   <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-    <div *ngFor="let itemT of tiposList" class="col">
+    <div *ngFor="let itemT of tiposList" class="col" [hidden]="!itemT.estoque">
       <div class="card" style="width: 18rem">
         <img src="{{ itemT.url_imagem }}" class="card-img-top" alt="..." />
         <div class="card-body">
@@ -59,7 +59,11 @@
             Você tem direito a {{ itemCarrinho.getItem.qtd_sabores }} sabores
           </h3>
           <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-            <div *ngFor="let item of SaborList; let i = index" class="col">
+            <div
+              *ngFor="let item of SaborList; let i = index"
+              [hidden]="!item.estoque"
+              class="col"
+            >
               <div class="card" style="width: 18rem">
                 <img src="{{ item.url_imagem }}" class="card-img-top" alt="" />
                 <div class="card-body">
