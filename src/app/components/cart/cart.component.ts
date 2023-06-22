@@ -2,6 +2,7 @@ import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as html2pdf from 'html2pdf.js';
+import * as JsonToXML from 'js2xmlparser';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -40,18 +41,20 @@ export class CartComponent implements OnInit {
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     };
+
+    console.log(JsonToXML.parse('person', this.products));
     html2pdf().from(element).set(opt).save();
+
     Swal.fire({
-      title: 'Enviado com sucesso?',
-      text: 'Por favor espere o pdf ser gerado para realizar uma nova compra',
+      title: 'Enviado com sucesso',
+      text: 'Aguarde enquanto o pdf estiver sendo criado',
       icon: 'success',
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'realizar uma nova compra',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigate(['/products']);
-        this.cartService.removeAllCart();
-      }
+      timer: 4000,
+      showConfirmButton: false,
+      showCancelButton: false,
+    }).then(() => {
+      this.router.navigate(['/products']);
+      this.cartService.removeAllCart();
     });
   }
 }

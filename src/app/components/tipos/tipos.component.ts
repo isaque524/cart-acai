@@ -158,7 +158,7 @@ export class TiposComponent implements OnInit {
       });
     } else {
       this.cartService.addtoCart(this.itemCarrinho);
-      alert('add');
+      Swal.fire('Enviado!', '', 'success');
       this.LigaAcordion = false;
     }
   }
